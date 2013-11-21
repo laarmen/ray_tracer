@@ -1,0 +1,25 @@
+class color
+!!!140428.cpp!!!	color()
+		red = green = blue = alpha = 0;
+!!!140556.cpp!!!	color(in c : color)
+		red   = c.get_red();
+		green = c.get_green();
+		blue  = c.get_blue();
+		alpha = c.get_alpha();
+!!!140684.cpp!!!	color(in r : byte, in g : byte, in b : byte)
+		red   = r;
+		green = g;
+		blue  = b;
+		alpha = 255;
+!!!140812.cpp!!!	color(in r : byte, in g : byte, in b : byte, in a : byte)
+		red   = r;
+		green = g;
+		blue  = b;
+		alpha = a;
+!!!141964.cpp!!!	operator ==(in c : color) : bool
+		return     (c.get_red()   == get_red())
+			&& (c.get_green() == get_green())
+			&& (c.get_blue()  == get_blue())
+			&& (c.get_alpha() == get_alpha());
+!!!142092.cpp!!!	operator int()
+		return 256*(256*(256*get_red() + get_green()) + get_blue()) + get_alpha();

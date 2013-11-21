@@ -1,0 +1,51 @@
+window_sizes 1918 528 374 1534 368 72
+diagrams
+  active  classdiagram_ref 128012 // global
+    1534 368 100 2 0 0
+end
+show_stereotypes
+marked
+  attribute_ref 136460 // data
+  operation_ref 142220 // image
+  operation_ref 142348 // image
+  operation_ref 142476 // image
+  operation_ref 142604 // ~image
+  operation_ref 142732 // width
+  operation_ref 142860 // height
+  operation_ref 142988 // copy
+  operation_ref 143116 // get_pixel
+  operation_ref 143244 // set_pixel
+  operation_ref 143372 // blit
+  operation_ref 143500 // blit
+  operation_ref 143628 // draw_line
+  operation_ref 143756 // draw_rect
+  operation_ref 143884 // fill_rect
+  operation_ref 150807 // image
+  operation_ref 150935 // image
+  operation_ref 151063 // image
+  operation_ref 151191 // ~image
+  operation_ref 151319 // width
+  operation_ref 151447 // height
+  operation_ref 151575 // copy
+  operation_ref 151703 // get_pixel
+  operation_ref 151831 // set_pixel
+  operation_ref 151959 // blit
+  operation_ref 152087 // blit
+  operation_ref 152215 // draw_line
+  operation_ref 152343 // draw_rect
+  operation_ref 152471 // fill_rect
+  classrelation_ref 130700 // <generalisation>
+  attribute_ref 136588 // initialized
+  attribute_ref 136716 // buffer
+  operation_ref 144012 // screen
+  operation_ref 144140 // ~screen
+  operation_ref 144268 // update
+end
+selected artifact_ref 135948 // image
+open
+  classview_ref 128012 // global
+  classview_ref 134668 // screen_vector
+  deploymentview_ref 134796 // screen_vector
+  deploymentview_ref 134924 // screen_vector
+end
+end

@@ -1,0 +1,1437 @@
+format 74
+"screen_vector" // screen_vector
+  revision 6
+  modified_by 23 "laarmen"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  cpp_h_dir "./screen_vector/"
+  cpp_src_dir "./screen_vector/"
+  cpp_namespace "rt"
+  classview 134668 "screen_vector"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 135692 "color"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "*
+	 * The color class represents a color through its
+	 * four components: red, green, blue and alpha (RGBA)."
+      operation 140428 "color"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Default constructor. Builds a white color."
+      end
+
+      operation 140556 "color"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "c" explicit_type "color"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy constructor."
+      end
+
+      operation 140684 "color"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param in name "r" explicit_type "byte"
+	  param in name "g" explicit_type "byte"
+	  param in name "b" explicit_type "byte"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Builds a color from its red, green and blue components.
+			 * Alpha is set to 255."
+      end
+
+      operation 140812 "color"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param in name "r" explicit_type "byte"
+	  param in name "g" explicit_type "byte"
+	  param in name "b" explicit_type "byte"
+	  param in name "a" explicit_type "byte"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Builds a color from its red, green, blue and alpha components."
+      end
+
+      operation 140940 "set_red"
+	cpp_virtual cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "r" explicit_type "byte"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+                            				red = r;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets the red component."
+      end
+
+      operation 141068 "get_red"
+	const cpp_virtual cpp_inline public explicit_return_type "byte"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+                            				return red;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the red component."
+      end
+
+      operation 141196 "set_green"
+	cpp_virtual cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "g" explicit_type "byte"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+                            				green = g;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets the green component."
+      end
+
+      operation 141324 "get_green"
+	const cpp_virtual cpp_inline public explicit_return_type "byte"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+                            				return green;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the green component."
+      end
+
+      operation 141452 "set_blue"
+	cpp_virtual cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "b" explicit_type "byte"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+                            				blue = b;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets the blue component."
+      end
+
+      operation 141580 "get_blue"
+	const cpp_virtual cpp_inline public explicit_return_type "byte"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+                            				return blue;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the blue component."
+      end
+
+      operation 141708 "set_alpha"
+	cpp_virtual cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "a" explicit_type "byte"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+                            				alpha = a;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets the alpha component."
+      end
+
+      operation 141836 "get_alpha"
+	const cpp_virtual cpp_inline public explicit_return_type "byte"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+                            				return alpha;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the alpha component."
+      end
+
+      operation 141964 "operator =="
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "bool"
+	nparams 1
+	  param in name "c" explicit_type "color"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Comparison operator."
+      end
+
+      operation 142092 "operator int"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Cast operator to int.
+			 * Represents the color as a int, with
+			 * red being the most significant byte."
+      end
+
+      classrelation 144023 // <composition>
+	relation_ref 142487 // <composition>
+      end
+
+      classrelation 144535 // <composition>
+	relation_ref 142743 // <composition>
+      end
+
+      classrelation 144791 // <composition>
+	relation_ref 142871 // <composition>
+      end
+    end
+
+    class 135820 "image"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "*
+	 * The image class wraps a SDL_Surface structure
+	 * to offer object-oriented access to its data.
+	 * It represents an in-memory image."
+      attribute 136460 "data"
+	protected explicit_type "SDL_Surface"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 142220 "image"
+	preserve_cpp_body_indent protected explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Default constructor is protected and can be used
+			 * only by inheriting classes. It is forbidden to
+			 * build an image without at least its dimensions."
+      end
+
+      operation 142348 "image"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "width" explicit_type "int"
+	  param in name "height" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Main constructor. Builds an image from its dimensions."
+      end
+
+      operation 142476 "image"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "img" explicit_type "image"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy constructor.
+			 * Warning: this does not copy the actual data, so
+			 * any modification to the copy will impact the original.
+			 * To build a hard copy, use the copy member function."
+      end
+
+      operation 142604 "~image"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Destructor. Will decrease the reference counter
+			 * of the wrapped data and free it if it goes to 0."
+      end
+
+      operation 142732 "width"
+	const cpp_virtual cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+                            				return data->w;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the width of the image."
+      end
+
+      operation 142860 "height"
+	const cpp_virtual cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+                            				return data->h;
+                            			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the height of the image."
+      end
+
+      operation 142988 "copy"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "image"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns a hard copy of the image."
+      end
+
+      operation 143116 "get_pixel"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "color"
+	nparams 2
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the color of a pixel."
+      end
+
+      operation 143244 "set_pixel"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 3
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "c" explicit_type "color"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets a pixel to a given color."
+      end
+
+      operation 143372 "blit"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "void"
+	nparams 4
+	  param inout name "dst" explicit_type "image"
+	  param in name "srcrect" explicit_type "rect"
+	  param in name "dstx" explicit_type "int"
+	  param in name "dsty" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}, const ${t1} & ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy/Past the image's source rectangle to a given destiation
+			 * at given coordinates."
+      end
+
+      operation 143500 "blit"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "void"
+	nparams 3
+	  param inout name "dst" explicit_type "image"
+	  param in name "dstx" explicit_type "int"
+	  param in name "dsty" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy/Past time entire image to a given destiation
+			 * at given coordinates."
+      end
+
+      operation 143628 "draw_line"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" explicit_type "color"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a line from (x1,y1) to (x2,y2) of a given color."
+      end
+
+      operation 143756 "draw_rect"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" explicit_type "color"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a rectangle (uses draw_line) of a given color."
+      end
+
+      operation 143884 "fill_rect"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" explicit_type "color"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a filled rectangle of a given color."
+      end
+
+      operation 150807 "image"
+	preserve_cpp_body_indent protected explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "!< Wrapped SDL surface 
+*
+			 * Default constructor is protected and can be used
+			 * only by inheriting classes. It is forbidden to
+			 * build an image without at least its dimensions."
+      end
+
+      operation 150935 "image"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "width" explicit_type "int"
+	  param in name "height" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Main constructor. Builds an image from its dimensions."
+      end
+
+      operation 151063 "image"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "img" type class_ref 135820 // image
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy constructor.
+			 * Warning: this does not copy the actual data, so
+			 * any modification to the copy will impact the original.
+			 * To build a hard copy, use the copy member function."
+      end
+
+      operation 151191 "~image"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Destructor. Will decrease the reference counter
+			 * of the wrapped data and free it if it goes to 0."
+      end
+
+      operation 151319 "width"
+	const cpp_virtual cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+				return data->w;
+			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the width of the image."
+      end
+
+      operation 151447 "height"
+	const cpp_virtual cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+				return data->h;
+			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the height of the image."
+      end
+
+      operation 151575 "copy"
+	preserve_cpp_body_indent const cpp_virtual public return_type class_ref 135820 // image
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns a hard copy of the image."
+      end
+
+      operation 151703 "get_pixel"
+	preserve_cpp_body_indent const cpp_virtual public return_type class_ref 135692 // color
+	nparams 2
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the color of a pixel."
+      end
+
+      operation 151831 "set_pixel"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 3
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets a pixel to a given color."
+      end
+
+      operation 151959 "blit"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "void"
+	nparams 4
+	  param inout name "dst" type class_ref 135820 // image
+	  param in name "srcrect" type class_ref 135948 // rect
+	  param in name "dstx" explicit_type "int"
+	  param in name "dsty" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}, const ${t1} & ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy/Past the image's source rectangle to a given destiation
+			 * at given coordinates."
+      end
+
+      operation 152087 "blit"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "void"
+	nparams 3
+	  param inout name "dst" type class_ref 135820 // image
+	  param in name "dstx" explicit_type "int"
+	  param in name "dsty" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy/Past time entire image to a given destiation
+			 * at given coordinates."
+      end
+
+      operation 152215 "draw_line"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a line from (x1,y1) to (x2,y2) of a given color."
+      end
+
+      operation 152343 "draw_rect"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a rectangle (uses draw_line) of a given color."
+      end
+
+      operation 152471 "fill_rect"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a filled rectangle of a given color."
+      end
+    end
+
+    class 135948 "rect"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "*
+	 * The rect class just renames the SDL_Rect structure.
+	 * It provides signed short x and y for the upper-left corner's coordinates,
+	 * and unsigned short w and h for width and height."
+      classrelation 130572 // <generalisation>
+	relation 130060 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130572 // <generalisation>
+	  b parent class_ref 136076 // typedef1
+      end
+    end
+
+    class 136076 "typedef1"
+      visibility package stereotype "typedef" explicit_base_type "SDL_Rect"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 136204 "screen"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "*
+	 * The screen class inherites from the image class in order
+	 * to draw something on the screen. It also wraps the SDL
+	 * initialization calls. Only one screen should be created.
+	 * If a second screen instance is created, it gets attached
+	 * to the first one and the width and height are ignored."
+      classrelation 130700 // <generalisation>
+	relation 130188 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130700 // <generalisation>
+	  b parent class_ref 135820 // image
+      end
+
+      attribute 136588 "initialized"
+	class_attribute private explicit_type "int"
+	init_value "= 0"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136716 "buffer"
+	class_attribute private explicit_type "SDL_Surface"
+	init_value "= NULL"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144012 "screen"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "width" explicit_type "int"
+	  param in name "height" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Main constructor, uses width and height."
+      end
+
+      operation 144140 "~screen"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Destructor. Decrements the initialized
+			 * counter and closes the screen only if it goes to 0."
+      end
+
+      operation 144268 "update"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Flushes the buffer to the screen, listen to event.
+			 * Returns false if a QUIT event (^C for exemple) has
+			 * been received."
+      end
+    end
+
+    class 136332 "vector"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "*
+	 * This structure describes a 3D vector, providing
+	 * basic operations (addition, scalar product, etc.)
+	 * by overloading common operators."
+      attribute 136844 "x"
+	public explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136972 "y"
+	public explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137100 "z"
+	public explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144396 "vector"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw} : x(0.0), y(0.0), z(0.0) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 144524 "vector"
+	cpp_inline public explicit_return_type ""
+	nparams 3
+	  param in name "a" explicit_type "double"
+	  param in name "b" explicit_type "double"
+	  param in name "c" explicit_type "double"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw} : x(a), y(b), z(c) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 144652 "operator =="
+	preserve_cpp_body_indent const public explicit_return_type "bool"
+	nparams 1
+	  param in name "other" explicit_type "vector"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Comparison"
+      end
+
+      operation 144780 "operator +"
+	preserve_cpp_body_indent const public explicit_return_type "vector"
+	nparams 1
+	  param in name "other" explicit_type "vector"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Addition: (a,b,c) + (d,e,f) = (a+d,b+e,c+f)"
+      end
+
+      operation 144908 "operator -"
+	preserve_cpp_body_indent const public explicit_return_type "vector"
+	nparams 1
+	  param in name "other" explicit_type "vector"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Substraction (a,b,c) - (d,e,f) = (a-d,b-e,c-f)"
+      end
+
+      operation 145036 "operator ^"
+	preserve_cpp_body_indent const public explicit_return_type "vector"
+	nparams 1
+	  param in name "other" explicit_type "vector"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Vectorial product 
+		 * (a,b,c) ^ (d,e,f) = (bf-ce,cd-af,ae-bd)"
+      end
+
+      operation 145164 "operator |"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 1
+	  param in name "other" explicit_type "vector"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Scalar product
+		 * ((a,b,c) | (d,e,f)) = ad + be + cf"
+      end
+
+      operation 145292 "norm"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Returns the norm of the vector"
+      end
+
+      operation 145420 "unit"
+	preserve_cpp_body_indent const public explicit_return_type "vector"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * return a vector of the same direction but of norm 1"
+      end
+
+      operation 152599 "vector"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw} : x(0.0), y(0.0), z(0.0) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 152727 "vector"
+	cpp_inline public explicit_return_type ""
+	nparams 3
+	  param in name "a" explicit_type "double"
+	  param in name "b" explicit_type "double"
+	  param in name "c" explicit_type "double"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw} : x(a), y(b), z(c) {};
+"
+	
+	
+	
+	
+      end
+
+      operation 152855 "operator =="
+	preserve_cpp_body_indent const public explicit_return_type "bool"
+	nparams 1
+	  param in name "other" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Comparison"
+      end
+
+      operation 152983 "operator +"
+	preserve_cpp_body_indent const public return_type class_ref 136332 // vector
+	nparams 1
+	  param in name "other" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Addition: (a,b,c) + (d,e,f) = (a+d,b+e,c+f)"
+      end
+
+      operation 153111 "operator -"
+	preserve_cpp_body_indent const public return_type class_ref 136332 // vector
+	nparams 1
+	  param in name "other" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Substraction (a,b,c) - (d,e,f) = (a-d,b-e,c-f)"
+      end
+
+      operation 153239 "operator ^"
+	preserve_cpp_body_indent const public return_type class_ref 136332 // vector
+	nparams 1
+	  param in name "other" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Vectorial product 
+		 * (a,b,c) ^ (d,e,f) = (bf-ce,cd-af,ae-bd)"
+      end
+
+      operation 153367 "operator |"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 1
+	  param in name "other" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Scalar product
+		 * ((a,b,c) | (d,e,f)) = ad + be + cf"
+      end
+
+      operation 153495 "norm"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * Returns the norm of the vector"
+      end
+
+      operation 153623 "unit"
+	preserve_cpp_body_indent const public return_type class_ref 136332 // vector
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+		 * return a vector of the same direction but of norm 1"
+      end
+
+      classrelation 128407 // <composition>
+	relation_ref 128151 // <composition>
+      end
+
+      classrelation 136343 // <composition>
+	relation_ref 135447 // <composition>
+      end
+
+      classrelation 143767 // <composition>
+	relation_ref 142359 // <composition>
+      end
+    end
+
+  end
+
+  deploymentview 134796 "screen_vector"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 135820 "color"
+      stereotype "source"
+      associated_classes
+	class_ref 135692 // color
+      end
+    end
+
+    artifact 135948 "image"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+      end
+    end
+
+    artifact 136076 "rect"
+      stereotype "source"
+      associated_classes
+	class_ref 136076 // typedef1
+	class_ref 135948 // rect
+      end
+    end
+
+    artifact 136204 "screen"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+      end
+    end
+
+    artifact 136332 "vector"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 136332 // vector
+      end
+    end
+  end
+
+  package_ref 128396 // screen_vector
+
+  classview 134796 "test"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+  end
+end

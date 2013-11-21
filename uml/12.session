@@ -1,0 +1,20 @@
+window_sizes 1920 1021 450 1464 876 71
+windows_style
+diagrams
+  active  classdiagram_ref 128012 // global
+    1464 835 100 2 36 0
+end
+show_stereotypes
+selected operation_ref 142871 // render
+open
+  class_ref 128012 // Scene
+  class_ref 128268 // Point
+  class_ref 134796 // Object
+  class_ref 128023 // Sphere
+  class_ref 134551 // LightSource
+  class_ref 141079 // Impact
+  deploymentview_ref 128012 // global
+  classview_ref 134668 // screen_vector
+end
+end
+verbose

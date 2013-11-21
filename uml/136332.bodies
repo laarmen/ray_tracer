@@ -1,0 +1,39 @@
+class vector
+!!!144652.cpp!!!	operator ==(in other : vector) : bool
+		return (other.x == x && other.y == y && other.z == z);
+!!!144780.cpp!!!	operator +(in other : vector) : vector
+		return vector(x+other.x,y+other.y,z+other.z);
+!!!144908.cpp!!!	operator -(in other : vector) : vector
+		return vector(x-other.x,y-other.y,z-other.z);
+!!!145036.cpp!!!	operator ^(in other : vector) : vector
+		return vector(y*other.z - z*other.y,
+			      z*other.x - x*other.z,
+			      x*other.y - y*other.x);
+!!!145164.cpp!!!	operator |(in other : vector) : double
+		return (x*other.x + y*other.y + z*other.z);
+!!!145292.cpp!!!	norm() : double
+		double n = std::sqrt(x*x+y*y+z*z);
+		return n;
+!!!145420.cpp!!!	unit() : vector
+		double n = norm();
+		vector v(x/n,y/n,z/n);
+		return v;
+!!!152855.cpp!!!	operator ==(in other : vector) : bool
+		return (other.x == x && other.y == y && other.z == z);
+!!!152983.cpp!!!	operator +(in other : vector) : vector
+		return vector(x+other.x,y+other.y,z+other.z);
+!!!153111.cpp!!!	operator -(in other : vector) : vector
+		return vector(x-other.x,y-other.y,z-other.z);
+!!!153239.cpp!!!	operator ^(in other : vector) : vector
+		return vector(y*other.z - z*other.y,
+			      z*other.x - x*other.z,
+			      x*other.y - y*other.x);
+!!!153367.cpp!!!	operator |(in other : vector) : double
+		return (x*other.x + y*other.y + z*other.z);
+!!!153495.cpp!!!	norm() : double
+		double n = std::sqrt(x*x+y*y+z*z);
+		return n;
+!!!153623.cpp!!!	unit() : vector
+		double n = norm();
+		vector v(x/n,y/n,z/n);
+		return v;

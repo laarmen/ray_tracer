@@ -1,0 +1,993 @@
+format 74
+"uml"
+  revision 9
+  modified_by 23 "laarmen"
+  cpp_root_dir "../src/"
+
+
+  
+  // class settings
+  default_attribute_visibility private default_relation_visibility private default_operation_visibility public
+  //class diagram settings
+  draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no show_members_full_definition no show_members_visibility no show_members_stereotype no show_members_context no show_members_multiplicity no show_members_initialization no show_attribute_modifiers no member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes show_stereotype_properties no
+  //use case diagram settings
+  package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes class_drawing_mode actor shadow yes show_stereotype_properties no
+  //sequence diagram settings
+  show_full_operations_definition no write_horizontally yes class_drawing_mode natural drawing_language uml draw_all_relations yes shadow yes show_stereotype_properties no show_class_context_mode no show_msg_context_mode no
+  //collaboration diagram settings
+  show_full_operations_definition no show_hierarchical_rank no write_horizontally yes drawing_language uml package_name_in_tab no show_context no show_msg_context no draw_all_relations yes shadow yes show_stereotype_properties no
+  //object diagram settings
+   write_horizontally yes package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties no
+  //component diagram settings
+  package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes shadow yes
+  draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no
+  //deployment diagram settings
+  package_name_in_tab no show_context no write_horizontally yes auto_label_position yes draw_all_relations yes shadow yes
+  draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no
+  //state diagram settings
+  package_name_in_tab no show_context no auto_label_position yes write_trans_label_horizontally yes show_trans_definition no draw_all_relations yes shadow yes
+  show_activities yes region_horizontally yes drawing_language uml show_stereotype_properties no
+  //activity diagram settings
+  package_name_in_tab no show_context no show_opaque_action_definition no auto_label_position yes write_flow_label_horizontally no draw_all_relations yes shadow yes
+  show_infonote yes drawing_language uml show_stereotype_properties no
+  
+  class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white 
+  font_size 10
+  diagram_format A4
+
+  mark_for_import
+  
+  ncouples 1
+  key "html dir" value "/private/student/1/71/13013371/MIT1/PROG1/ray_tracer/doc/"
+  classview 128012 "global"
+    //class diagram settings
+    draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language c++ show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    default_relation_visibility public
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    classdiagram 128012 "global"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A2
+    end
+
+    class 128012 "Scene"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 128524 "fov"
+	private explicit_type "uint"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 128023 "screen_width"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 128268 // objects (<composition>)
+	relation 128140 *---
+	  stereotype "std::vector"
+	  a role_name "objects" multiplicity "*" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 128268 // objects (<composition>)
+	  b role_name "" public
+	    classrelation_ref 128396 // <composition>
+      end
+
+      classrelation 128524 // camera (<composition>)
+	relation 128268 *---
+	  a role_name "camera" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 128524 // camera (<composition>)
+	  b role_name "" public
+	    classrelation_ref 128652 // <composition>
+      end
+
+      classrelation 135959 // light_source (<composition>)
+	relation 135319 *---
+	  a role_name "light_source" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135959 // light_source (<composition>)
+	  b role_name "" public
+	    classrelation_ref 136087 // <composition>
+      end
+
+      classrelation 136215 // view_direction (<composition>)
+	relation 135447 *---
+	  a role_name "view_direction" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136215 // view_direction (<composition>)
+	  b role_name "" private
+	    classrelation_ref 136343 // <composition>
+      end
+
+      operation 149783 "Scene"
+	public explicit_return_type ""
+	nparams 5
+	  param in name "light" type class_ref 134551 // LightSource
+	  param in name "camera" type class_ref 128268 // Point
+	  param in name "screen_width" explicit_type "double"
+	  param in name "fov" explicit_type "double"
+	  param in name "view_direction" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}:
+    fov(fov), objects(0), camera(camera), light_source(light), view_direction(view_direction), screen_width(screen_width)
+${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Create a new Scene from the following data:
+  * light : the light source of the scene (copied into the scene)
+  * camera : the point of origin of the camera
+  * screen_width : the width of the screen (NOT in pixels)
+  * fov : The field of view. This is an angle in radians that defines the width of the view. The narrower it is, the further is the screen from the camera (and the closer to the objects displayed)
+  * view_direction : from the camera, the direction of the upper left corner of the screen."
+      end
+
+      operation 142999 "add_object"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "obj" type class_ref 134796 // Object
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Add an object to the scene.
+
+Note that no copy will be made of the object, the Scene will store a reference. Make sure the object lifetime is long enough!"
+      end
+
+      operation 142871 "render"
+	cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param inout name "img" type class_ref 135820 // image
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Renders the whole scene in `img`."
+      end
+
+      operation 152460 "render_ray"
+	cpp_virtual public return_type class_ref 135692 // color
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Computes the color of a ray.
+This is used for the original rays from the camera, but can also be used recursively by an object."
+      end
+
+      operation 152588 "get_interceptor"
+	cpp_virtual public return_type class_ref 134796 // Object
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} * ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} * ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 150039 "get_screen_width"
+	const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the width of the screen."
+      end
+
+      operation 149911 "get_fov"
+	const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the field of view of the scene (an angle in radians)."
+      end
+
+      operation 150167 "get_camera"
+	const public return_type class_ref 128268 // Point
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the point where the camera stands."
+      end
+
+      operation 150551 "get_view_direction"
+	const public return_type class_ref 136332 // vector
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the direction of the upper left corner of the screen from the PoV of the camera."
+      end
+
+      operation 150423 "set_fov"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "double" explicit_type "angle double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Sets the field of view to `angle`."
+      end
+
+      operation 150295 "set_camera"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "p" type class_ref 128268 // Point
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Moves the camera to the point `p`"
+      end
+
+      operation 150679 "set_view_direction"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "v" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Points the upper left corner of the screen towards `v` from the camera."
+      end
+
+    end
+
+    class 128268 "Point"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 135180 "abs"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135308 "ord"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135564 "app"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 134796 "x"
+	const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	ncouples 1
+	key "const" value ""
+	comment "Returns the abscissa of the point."
+      end
+
+      operation 135052 "y"
+	const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the ordinate of the point."
+      end
+
+      operation 135180 "z"
+	const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the applicate of the point."
+      end
+
+      operation 152076 "operator -"
+	preserve_cpp_body_indent public return_type class_ref 136332 // vector
+	nparams 1
+	  param in name "p" type class_ref 128268 // Point
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Returns the vector from `p` to `this`"
+      end
+
+      classrelation 128151 // <composition>
+	relation_ref 128023 // <composition>
+      end
+
+      classrelation 128652 // <composition>
+	relation_ref 128268 // <composition>
+      end
+
+      classrelation 135831 // <composition>
+	relation_ref 135191 // <composition>
+      end
+
+      classrelation 136599 // <composition>
+	relation_ref 135575 // <composition>
+      end
+
+      classrelation 143255 // <composition>
+	relation_ref 142103 // <composition>
+      end
+    end
+
+    class 134796 "Object"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "The mathematical representation of an object. This class is abstract."
+      operation 134924 "intersects"
+	abstract const cpp_virtual public explicit_return_type "double"
+	nparams 1
+	  param in name "r" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "If the object intersects the ray, returns the distance between the origin of the ray and the intersection point.
+Otherwise, returns a negative number."
+      end
+
+      operation 128535 "render"
+	cpp_virtual public return_type class_ref 135692 // color
+	nparams 3
+	  param in name "ray" type class_ref 142860 // Ray
+	  param inout name "scene" type class_ref 128012 // Scene
+	  param in name "light_source" type class_ref 134551 // LightSource
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}, ${t1} & ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}, ${t1} & ${p1}, const ${t2} & ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Outputs the color of the object at the point where `ray` hits it."
+      end
+
+      operation 142487 "get_impact"
+	abstract const cpp_virtual public return_type class_ref 141079 // Impact
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "Computes the impact of a ray onto the object.
+Returns an impact with a null normal vector if the ray doesn't hit the object at all."
+      end
+
+      classrelation 144663 // color (<composition>)
+	relation 142871 *---
+	  a role_name "color" multiplicity "1" public
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 144663 // color (<composition>)
+	  b role_name "" private
+	    classrelation_ref 144791 // <composition>
+      end
+
+      classrelation 128396 // <composition>
+	relation_ref 128140 // <composition>
+      end
+    end
+
+    class 142860 "Ray"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128023 // origin (<composition>)
+	relation 128023 *---
+	  a role_name "origin" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 128023 // origin (<composition>)
+	  b role_name "" public
+	    classrelation_ref 128151 // <composition>
+      end
+
+      classrelation 128279 // direction (<composition>)
+	relation 128151 *---
+	  a role_name "direction" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 128279 // direction (<composition>)
+	  b role_name "" private
+	    classrelation_ref 128407 // <composition>
+      end
+
+      operation 128279 "Ray"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "origin" type class_ref 128268 // Point
+	  param in name "direction" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Construct a ray from a point of origin and a direction vector. The latter doesn't have to be normalized."
+      end
+
+      operation 128407 "Ray"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "origin" type class_ref 128268 // Point
+	  param in name "through" type class_ref 128268 // Point
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Construct a ray originating from `origin` and passing through the point `through`."
+      end
+    end
+
+    class 128023 "Sphere"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128919 // <realization>
+	relation 128535 -_-|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128919 // <realization>
+	  b parent class_ref 134796 // Object
+      end
+
+      operation 128663 "intersects"
+	const cpp_virtual public explicit_return_type "double"
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "If the object intersects the ray, returns the distance between the origin of the ray and the intersection point.
+Otherwise, returns a negative number."
+      end
+
+      operation 128919 "Sphere"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "center" type class_ref 128268 // Point
+	  param in name "radius" explicit_type "double"
+	  param in name "color" type class_ref 135692 // color
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}: center(center)${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 136471 // center (<composition>)
+	relation 135575 *---
+	  a role_name "center" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136471 // center (<composition>)
+	  b role_name "" public
+	    classrelation_ref 136599 // <composition>
+      end
+
+      classrelation 143895 // color (<composition>)
+	relation 142487 *---
+	  a role_name "color" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 143895 // color (<composition>)
+	  b role_name "" private
+	    classrelation_ref 144023 // <composition>
+      end
+
+      operation 142615 "get_impact"
+	const cpp_virtual public return_type class_ref 141079 // Impact
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Computes the impact of a ray onto the object.
+Returns an impact with a null normal vector if the ray doesn't hit the object at all."
+      end
+
+      attribute 143628 "radius"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 134551 "LightSource"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "A source of white light."
+      classrelation 135703 // origin (<composition>)
+	relation 135191 *---
+	  a role_name "origin" multiplicity "1" protected
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135703 // origin (<composition>)
+	  b role_name "" public
+	    classrelation_ref 135831 // <composition>
+      end
+
+      operation 135959 "get_origin"
+	const public return_type class_ref 128268 // Point
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 144407 // color (<composition>)
+	relation 142743 *---
+	  a role_name "color" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 144407 // color (<composition>)
+	  b role_name "" private
+	    classrelation_ref 144535 // <composition>
+      end
+
+      operation 143127 "get_color"
+	const public return_type class_ref 135692 // color
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "The color of the light source."
+      end
+
+      operation 143255 "LightSource"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "point" type class_ref 128268 // Point
+	  param in name "color" type class_ref 135692 // color
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 136087 // <composition>
+	relation_ref 135319 // <composition>
+      end
+    end
+
+    class 141079 "Impact"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl "${comment}struct ${name} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 143127 // point (<composition>)
+	relation 142103 *---
+	  a role_name "point" multiplicity "1" public
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 143127 // point (<composition>)
+	  b role_name "" public
+	    classrelation_ref 143255 // <composition>
+      end
+
+      classrelation 143639 // normale (<composition>)
+	relation 142359 *---
+	  a role_name "normale" multiplicity "1" public
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 143639 // normale (<composition>)
+	  b role_name "" private
+	    classrelation_ref 143767 // <composition>
+      end
+    end
+  end
+
+  deploymentview 128012 "global"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128012 "scene"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128012 // Scene
+      end
+    end
+
+    artifact 128268 "point"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128268 // Point
+      end
+    end
+
+    artifact 134796 "object"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 134796 // Object
+      end
+    end
+
+    artifact 128023 "ray"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 142860 // Ray
+      end
+    end
+
+    artifact 134551 "sphere"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128023 // Sphere
+      end
+    end
+
+    artifact 134679 "lightsource"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 134551 // LightSource
+      end
+    end
+
+    artifact 142988 "impact"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 141079 // Impact
+      end
+    end
+  end
+
+  package_ref 128268 // screen_vector
+add_operation_profile
+
+end
