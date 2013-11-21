@@ -1,0 +1,6 @@
+build/
+*.py
+*.tar.bz2
+screen_vector/
+main
+doc/
