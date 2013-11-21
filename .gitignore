@@ -1,6 +1,7 @@
 build/
 *.py
+*.pyc
 *.tar.bz2
-screen_vector/
+screen_vector~/
 main
 doc/
