@@ -3,8 +3,12 @@
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
 
 \usepackage{graphicx}
+
+
+\lstset{language=C++}
 
 \title{Lancer de rayon}
 \subtitle{Première partie}
@@ -48,9 +52,85 @@ réfraction.
 	\tableofcontents
 \end{frame}
 
-\section{1}
+\section{Implémentation de base}
+\begin{frame}{Diagramme UML}
+    \begin{center}
+        \includegraphics[scale=0.2]{img/uml.png}
+    \end{center}
+\end{frame}
 
-\section{2}
+\begin{frame}{Classe Scene}
+    \begin{itemize}
+        \item Point d'entrée du lanceur de rayon
+        \item Ne gère que des cas de base
+            \begin{itemize}
+                \item Une seule source de lumière
+            \end{itemize}
+        \item Logique séparée en plusieurs méthodes, toutes virtuelles
+        \item Pas plus de 20 lignes par méthode.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Classe Scene — code}
+    \begin{lstlisting}
+class Scene {
+  public:
+    Scene(const LightSource & light,
+          const Point & camera, double screen_width,
+          const Point& screen_center);
+
+    void add_object(Object & obj);
+
+    virtual void render(rt::image & img);
+
+    virtual rt::color render_ray(const Ray & ray);
+
+    virtual Object * get_interceptor(const Ray & ray,
+          std::list<Object *> * others = 0);
+};
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Classe Object}
+    \begin{itemize}
+        \item Abstraction d'un objet mathématique présent dans la scène
+        \item Délègue la compréhension de la géométrie aux classes en héritant
+        \item Utilise une classe Material annexe pour gérer les extensions dépendantes du matériau
+            \begin{itemize}
+                \item Transparence
+                \item Réflexion
+                \item \emph{et cæetera}
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Object — code}
+    \begin{lstlisting}
+class Object {
+private:
+  rt::color color;
+  Material * material;
+public:
+  Object(const rt::color color,
+      Material * material = 0);
+  virtual double intersects(const Ray & r) const = 0;
+  virtual rt::color render_direct(const Ray & ray,
+          Scene & scene,
+          const LightSource & light_source);
+  virtual rt::color render_indirect(const Ray & ray,
+          Scene & scene);
+  virtual Impact get_impact(const Ray & ray) const = 0;
+};
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Difficultés d'implémentation}
+\begin{block}{Nombres à virgule flottante et plans}
+    Le point d'intersection n'est que rarement exactement sur le plan.
+
+    $\Rightarrow$ Prise en compte d'un $\epsilon$ lors du lancer du rayon vers la source.
+\end{block}
+\end{frame}
 
 \section{Améliorations}
 \begin{frame}{Gestion de plusieurs sources}
