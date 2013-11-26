@@ -7,15 +7,18 @@
 class Ray;
 class Scene;
 class LightSource;
+class Material;
 
 //The mathematical representation of an object. This class is abstract.
 class Object {
   private:
     rt::color color;
 
+    Material * material;
+
   public:
     // Constructs the base of an object: its color.
-    Object(const rt::color color);
+    Object(const rt::color color, Material * material = 0);
 
     //If the object intersects the ray, returns the distance between the origin of the ray and the intersection point.
     //Otherwise, returns a negative number.

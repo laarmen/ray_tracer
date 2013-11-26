@@ -2,23 +2,16 @@
 #include "object.hpp"
 #include "ray.hpp"
 #include "scene.hpp"
+#include "utils.hpp"
 #include "lightsource.hpp"
+#include "material.hpp"
 #include <algorithm>
 
 // Useful if one catches one's own rays because of floating error.
 #define OWNRAY_EPSILON 0.00000000000000075
 
 // Constructs the base of an object: its color.
-Object::Object(const rt::color color): color(color) {
-}
-
-static rt::color compose(const rt::color& c1, const rt::color& c2) {
-    rt::color inv_c1(255-c1.get_red(), 255-c1.get_green(), 255-c1.get_blue(), 255-c1.get_alpha());
-    return rt::color(
-        c2.get_red()-std::min(inv_c1.get_red(), c2.get_red()),
-        c2.get_green()-std::min(inv_c1.get_green(), c2.get_green()),
-        c2.get_blue()-std::min(inv_c1.get_blue(), c2.get_blue())
-        );
+Object::Object(const rt::color color, Material * material): color(color), material(material) {
 }
 
 //Outputs the color of the object as enlightened by at the point where `ray` hits it.
@@ -54,6 +47,10 @@ rt::color Object::render_direct(const Ray & ray, Scene & scene, const LightSourc
 //The default implementation simply returns `rt::color::BLACK` as no other interaction than direct
 //lightning taken into account.
 rt::color Object::render_indirect(const Ray & ray, Scene & scene) {
+    Impact imp = get_impact(ray);
+    if (material) {
+        return material->indirect_rendering(ray, scene, imp, *this);
+    }
     return rt::color::BLACK;
 }
 

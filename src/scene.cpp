@@ -3,6 +3,7 @@
 #include "object.hpp"
 #include "screen_vector/image.hpp"
 #include "ray.hpp"
+#include "utils.hpp"
 
 #include <cmath>
 
@@ -50,21 +51,6 @@ void Scene::render(rt::image & img) {
     }
 }
 
-static rt::color color_addition(const std::vector<rt::color>& v) {
-    double red_inv = 1.0;
-    double green_inv = 1.0;
-    double blue_inv = 1.0;
-    for (std::vector<rt::color>::const_iterator it = v.begin(); it != v.end(); ++it) {
-        red_inv *= static_cast<double>(255-it->get_red())/255.;
-        green_inv *= static_cast<double>(255-it->get_green())/255.;
-        blue_inv *= static_cast<double>(255-it->get_blue())/255.;
-    }
-    return rt::color(
-            ceil(255.*(1.0-red_inv)),
-            ceil(255.*(1.0-green_inv)),
-            ceil(255.*(1.0-blue_inv))
-        );
-}
 //Computes the color of a ray.
 //This is used for the original rays from the camera, but can also be used recursively by an object.
 rt::color Scene::render_ray(const Ray & ray) {
@@ -76,7 +62,7 @@ rt::color Scene::render_ray(const Ray & ray) {
     colors.push_back(interceptor->render_indirect(ray, *this));
     colors.push_back(interceptor->render_direct(ray, *this, light_source));
     // Pardon the C-like casts, but reinterpret_cast
-    return color_addition(colors);
+    return add(colors);
 }
 
 Object * Scene::get_interceptor(const Ray & ray, std::list<Object *> * others) {
