@@ -1,0 +1,14 @@
+class MultiLightScene
+!!!160535.cpp!!!	render_ray(in ray : Ray) : color
+    Object * interceptor = get_interceptor(ray);
+    if (!interceptor) {
+        return rt::color::BLACK;
+    }
+    std::vector<rt::color> colors(0);
+    colors.push_back(interceptor->render_indirect(ray, *this));
+    for(std::vector<LightSource>::const_iterator it = sources.begin(); it != sources.end(); ++it) {
+        colors.push_back(interceptor->render_direct(ray, *this, *it));
+    }
+    return add(colors);
+!!!160791.cpp!!!	add_light(in src : LightSource) : void
+    sources.push_back(src);

@@ -1,6 +1,6 @@
 format 74
 "uml"
-  revision 9
+  revision 10
   modified_by 23 "laarmen"
   cpp_root_dir "../src/"
 
@@ -38,7 +38,7 @@ format 74
   mark_for_import
   
   ncouples 1
-  key "html dir" value "/private/student/1/71/13013371/MIT1/PROG1/ray_tracer/doc/"
+  key "html dir" value "/home/laarmen/MIT1/ray_tracer/doc/"
   classview 128012 "global"
     //class diagram settings
     draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language c++ show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -73,14 +73,13 @@ ${inlines}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 128524 "fov"
-	private explicit_type "uint"
-	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+      classrelation 152087 // direction (<directional composition>)
+	relation 150167 *-->
+	  a role_name "direction" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
+	    classrelation_ref 152087 // direction (<directional composition>)
+	  b parent class_ref 136332 // vector
       end
 
       attribute 128023 "screen_width"
@@ -124,29 +123,17 @@ ${inlines}
 	    classrelation_ref 136087 // <composition>
       end
 
-      classrelation 136215 // view_direction (<composition>)
-	relation 135447 *---
-	  a role_name "view_direction" multiplicity "1" private
-	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	    classrelation_ref 136215 // view_direction (<composition>)
-	  b role_name "" private
-	    classrelation_ref 136343 // <composition>
-      end
-
       operation 149783 "Scene"
 	public explicit_return_type ""
-	nparams 5
+	nparams 4
 	  param in name "light" type class_ref 134551 // LightSource
 	  param in name "camera" type class_ref 128268 // Point
 	  param in name "screen_width" explicit_type "double"
-	  param in name "fov" explicit_type "double"
-	  param in name "view_direction" type class_ref 136332 // vector
-	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${)}${volatile}${throw};
+	  param in name "screen_center" type class_ref 128268 // Point
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, ${t2} ${p2}${v2}, const ${t3} & ${p3}${v3}${)}${volatile}${throw};
 "
-	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}:
-    fov(fov), objects(0), camera(camera), light_source(light), view_direction(view_direction), screen_width(screen_width)
-${throw}{
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}, ${t2} ${p2}, const ${t3} & ${p3}${)}:
+    direction(screen_center-camera), screen_width(screen_width), objects(0), camera(camera), light_source(light) ${throw}{
   ${body}}
 "
 	
@@ -157,12 +144,11 @@ ${throw}{
   * light : the light source of the scene (copied into the scene)
   * camera : the point of origin of the camera
   * screen_width : the width of the screen (NOT in pixels)
-  * fov : The field of view. This is an angle in radians that defines the width of the view. The narrower it is, the further is the screen from the camera (and the closer to the objects displayed)
-  * view_direction : from the camera, the direction of the upper left corner of the screen."
+  * screen_center: a point in the center of the screen."
       end
 
       operation 142999 "add_object"
-	public explicit_return_type "void"
+	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param inout name "obj" type class_ref 134796 // Object
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
@@ -180,7 +166,7 @@ Note that no copy will be made of the object, the Scene will store a reference. 
       end
 
       operation 142871 "render"
-	cpp_virtual public explicit_return_type "void"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
 	nparams 1
 	  param inout name "img" type class_ref 135820 // image
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
@@ -196,7 +182,7 @@ Note that no copy will be made of the object, the Scene will store a reference. 
       end
 
       operation 152460 "render_ray"
-	cpp_virtual public return_type class_ref 135692 // color
+	preserve_cpp_body_indent cpp_virtual public return_type class_ref 135692 // color
 	nparams 1
 	  param in name "ray" type class_ref 142860 // Ray
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
@@ -213,22 +199,28 @@ This is used for the original rays from the camera, but can also be used recursi
       end
 
       operation 152588 "get_interceptor"
-	cpp_virtual public return_type class_ref 134796 // Object
-	nparams 1
+	preserve_cpp_body_indent cpp_virtual public return_type class_ref 134796 // Object
+	nparams 2
 	  param in name "ray" type class_ref 142860 // Ray
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} * ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	  param inout name "others" explicit_type "std::list<Object *>"
+	    defaultvalue "0"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} * ${name}${(}const ${t0} & ${p0}${v0}, ${t1} * ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${type} * ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "${comment}${inline}${type} * ${class}::${name}${(}const ${t0} & ${p0}, ${t1} * ${p1}${)}${const}${volatile}${throw}${staticnl}{
   ${body}}
 "
 	
 	
 	
 	
+	comment " Given a ray, gives out the first object of the scene to intercept it,
+ or the null pointer if there aren't any.
+ If you wish, you can also get all the interceptors (even the farther ones)
+ stored in the `others` list."
       end
 
       operation 150039 "get_screen_width"
-	const public explicit_return_type "double"
+	preserve_cpp_body_indent const public explicit_return_type "double"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -242,23 +234,8 @@ This is used for the original rays from the camera, but can also be used recursi
 	comment "Returns the width of the screen."
       end
 
-      operation 149911 "get_fov"
-	const public explicit_return_type "double"
-	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	
-	comment "Returns the field of view of the scene (an angle in radians)."
-      end
-
       operation 150167 "get_camera"
-	const public return_type class_ref 128268 // Point
+	preserve_cpp_body_indent const public return_type class_ref 128268 // Point
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -272,8 +249,8 @@ This is used for the original rays from the camera, but can also be used recursi
 	comment "Returns the point where the camera stands."
       end
 
-      operation 150551 "get_view_direction"
-	const public return_type class_ref 136332 // vector
+      operation 162327 "get_screen_center"
+	preserve_cpp_body_indent const public return_type class_ref 128268 // Point
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -284,27 +261,11 @@ This is used for the original rays from the camera, but can also be used recursi
 	
 	
 	
-	comment "Returns the direction of the upper left corner of the screen from the PoV of the camera."
-      end
-
-      operation 150423 "set_fov"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "double" explicit_type "angle double"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	
-	comment "Sets the field of view to `angle`."
+	comment "Returns the position of the center of the screen."
       end
 
       operation 150295 "set_camera"
-	public explicit_return_type "void"
+	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param in name "p" type class_ref 128268 // Point
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
@@ -319,10 +280,10 @@ This is used for the original rays from the camera, but can also be used recursi
 	comment "Moves the camera to the point `p`"
       end
 
-      operation 150679 "set_view_direction"
-	public explicit_return_type "void"
+      operation 162455 "set_screen_center"
+	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
-	  param in name "v" type class_ref 136332 // vector
+	  param in name "p" type class_ref 128268 // Point
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
@@ -332,7 +293,7 @@ This is used for the original rays from the camera, but can also be used recursi
 	
 	
 	
-	comment "Points the upper left corner of the screen towards `v` from the camera."
+	comment "Moves the center of the screen to the point `p`"
       end
 
     end
@@ -380,7 +341,7 @@ ${inlines}
       end
 
       operation 134796 "x"
-	const public explicit_return_type "double"
+	preserve_cpp_body_indent const public explicit_return_type "double"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -397,7 +358,7 @@ ${inlines}
       end
 
       operation 135052 "y"
-	const public explicit_return_type "double"
+	preserve_cpp_body_indent const public explicit_return_type "double"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -412,7 +373,7 @@ ${inlines}
       end
 
       operation 135180 "z"
-	const public explicit_return_type "double"
+	preserve_cpp_body_indent const public explicit_return_type "double"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -427,7 +388,7 @@ ${inlines}
       end
 
       operation 152076 "operator -"
-	preserve_cpp_body_indent public return_type class_ref 136332 // vector
+	preserve_cpp_body_indent const public return_type class_ref 136332 // vector
 	nparams 1
 	  param in name "p" type class_ref 128268 // Point
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
@@ -440,6 +401,52 @@ ${inlines}
 	
 	
 	comment "Returns the vector from `p` to `this`"
+      end
+
+      operation 161687 "operator +="
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "v" type class_ref 136332 // vector
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161815 "Point"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param in name "x" explicit_type "double"
+	  param in name "y" explicit_type "double"
+	  param in name "z" explicit_type "double"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}: abs(x), ord(y), app(z) ${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161943 "Point"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}: abs(0.), ord(0.), app(0.) ${throw}{
+  ${body}}
+"
+	
+	
+	
+	
       end
 
       classrelation 128151 // <composition>
@@ -476,6 +483,43 @@ ${inlines}
       explicit_switch_type ""
       
       comment "The mathematical representation of an object. This class is abstract."
+      classrelation 144663 // color (<composition>)
+	relation 142871 *---
+	  a role_name "color" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 144663 // color (<composition>)
+	  b role_name "" private
+	    classrelation_ref 144791 // <composition>
+      end
+
+      classrelation 151575 // material (<unidirectional association>)
+	relation 149655 --->
+	  a role_name "material" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 151575 // material (<unidirectional association>)
+	  b parent class_ref 147607 // Material
+      end
+
+      operation 160919 "Object"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "color" type class_ref 135692 // color
+	  param inout name "material" type class_ref 147607 // Material
+	    defaultvalue "0"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} ${p0}${v0}, ${t1} * ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} ${p0}, ${t1} * ${p1}${)}: color(color), material(material) ${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment " Constructs the base of an object: its color."
+      end
+
       operation 134924 "intersects"
 	abstract const cpp_virtual public explicit_return_type "double"
 	nparams 1
@@ -490,8 +534,8 @@ ${inlines}
 Otherwise, returns a negative number."
       end
 
-      operation 128535 "render"
-	cpp_virtual public return_type class_ref 135692 // color
+      operation 161047 "render_direct"
+	preserve_cpp_body_indent cpp_virtual public return_type class_ref 135692 // color
 	nparams 3
 	  param in name "ray" type class_ref 142860 // Ray
 	  param inout name "scene" type class_ref 128012 // Scene
@@ -505,7 +549,26 @@ Otherwise, returns a negative number."
 	
 	
 	
-	comment "Outputs the color of the object at the point where `ray` hits it."
+	comment "Outputs the color of the object as enlightened by at the point where `ray` hits it."
+      end
+
+      operation 161175 "render_indirect"
+	preserve_cpp_body_indent cpp_virtual public return_type class_ref 135692 // color
+	nparams 2
+	  param in name "ray" type class_ref 142860 // Ray
+	  param inout name "scene" type class_ref 128012 // Scene
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Compute the color component of the ray provided by the object unrelated to direct enlightenment.
+The default implementation simply returns `rt::color::BLACK` as no other interaction than direct
+lightning taken into account."
       end
 
       operation 142487 "get_impact"
@@ -520,16 +583,6 @@ Otherwise, returns a negative number."
 	
 	comment "Computes the impact of a ray onto the object.
 Returns an impact with a null normal vector if the ray doesn't hit the object at all."
-      end
-
-      classrelation 144663 // color (<composition>)
-	relation 142871 *---
-	  a role_name "color" multiplicity "1" public
-	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	    classrelation_ref 144663 // color (<composition>)
-	  b role_name "" private
-	    classrelation_ref 144791 // <composition>
       end
 
       classrelation 128396 // <composition>
@@ -576,7 +629,7 @@ ${inlines}
 	  param in name "direction" type class_ref 136332 // vector
 	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${volatile}${throw};
 "
-	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${throw}{
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}: origin(origin), direction(direction.unit()) ${throw}{
   ${body}}
 "
 	
@@ -593,7 +646,7 @@ ${inlines}
 	  param in name "through" type class_ref 128268 // Point
 	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${volatile}${throw};
 "
-	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${throw}{
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}: origin(origin), direction((through-origin).unit()) ${throw}{
   ${body}}
 "
 	
@@ -601,6 +654,36 @@ ${inlines}
 	
 	
 	comment "Construct a ray originating from `origin` and passing through the point `through`."
+      end
+
+      operation 162071 "get_origin"
+	preserve_cpp_body_indent const public return_type class_ref 128268 // Point
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment " Returns the point of origin of the ray"
+      end
+
+      operation 162199 "get_direction"
+	preserve_cpp_body_indent const public return_type class_ref 136332 // vector
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment " Returns the normalized vector representing the direction of the ray"
       end
     end
 
@@ -624,8 +707,127 @@ ${inlines}
 	  b parent class_ref 134796 // Object
       end
 
+      classrelation 136471 // center (<composition>)
+	relation 135575 *---
+	  a role_name "center" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136471 // center (<composition>)
+	  b role_name "" public
+	    classrelation_ref 136599 // <composition>
+      end
+
+      classrelation 143895 // color (<composition>)
+	relation 142487 *---
+	  a role_name "color" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 143895 // color (<composition>)
+	  b role_name "" private
+	    classrelation_ref 144023 // <composition>
+      end
+
+      attribute 143628 "radius"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      class 147991 "CoeffPoly"
+	visibility package stereotype "struct"
+	cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	
+	attribute 134551 "a"
+	  public explicit_type "double"
+	  cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+
+	attribute 134679 "b"
+	  public explicit_type "double"
+	  cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+
+	attribute 134807 "c"
+	  public explicit_type "double"
+	  cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+
+	operation 162583 "discriminant"
+	  const cpp_inline public explicit_return_type "double"
+	  nparams 0
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} { return b*b-4*a*c; };
+"
+	  
+	  
+	  
+	  
+	end
+      end
+
+      operation 162711 "compute_coeffs"
+	preserve_cpp_body_indent const private return_type class_ref 147991 // CoeffPoly
+	nparams 1
+	  param in name "r" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment " We don't have a choice if we want
+ to keep this private, the compiler complains
+ otherwise. Don't do this at home!"
+      end
+
+      operation 142615 "get_impact"
+	preserve_cpp_body_indent const cpp_virtual public return_type class_ref 141079 // Impact
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Computes the impact of a ray onto the object.
+Returns an impact with a null normal vector if the ray doesn't hit the object at all."
+      end
+
       operation 128663 "intersects"
-	const cpp_virtual public explicit_return_type "double"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "double"
 	nparams 1
 	  param in name "ray" type class_ref 142860 // Ray
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
@@ -649,60 +851,13 @@ Otherwise, returns a negative number."
 	  param in name "color" type class_ref 135692 // color
 	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${volatile}${throw};
 "
-	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}: center(center)${throw}{
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}: Object(color), center(center), radius(radius) ${throw}{
   ${body}}
 "
 	
 	
 	
 	
-      end
-
-      classrelation 136471 // center (<composition>)
-	relation 135575 *---
-	  a role_name "center" multiplicity "1" private
-	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	    classrelation_ref 136471 // center (<composition>)
-	  b role_name "" public
-	    classrelation_ref 136599 // <composition>
-      end
-
-      classrelation 143895 // color (<composition>)
-	relation 142487 *---
-	  a role_name "color" multiplicity "1" private
-	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	    classrelation_ref 143895 // color (<composition>)
-	  b role_name "" private
-	    classrelation_ref 144023 // <composition>
-      end
-
-      operation 142615 "get_impact"
-	const cpp_virtual public return_type class_ref 141079 // Impact
-	nparams 1
-	  param in name "ray" type class_ref 142860 // Ray
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	
-	comment "Computes the impact of a ray onto the object.
-Returns an impact with a null normal vector if the ray doesn't hit the object at all."
-      end
-
-      attribute 143628 "radius"
-	private explicit_type "double"
-	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
       end
     end
 
@@ -719,6 +874,16 @@ ${inlines}
       explicit_switch_type ""
       
       comment "A source of white light."
+      classrelation 144407 // color (<composition>)
+	relation 142743 *---
+	  a role_name "color" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 144407 // color (<composition>)
+	  b role_name "" private
+	    classrelation_ref 144535 // <composition>
+      end
+
       classrelation 135703 // origin (<composition>)
 	relation 135191 *---
 	  a role_name "origin" multiplicity "1" protected
@@ -730,7 +895,7 @@ ${inlines}
       end
 
       operation 135959 "get_origin"
-	const public return_type class_ref 128268 // Point
+	preserve_cpp_body_indent const public return_type class_ref 128268 // Point
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -743,18 +908,8 @@ ${inlines}
 	
       end
 
-      classrelation 144407 // color (<composition>)
-	relation 142743 *---
-	  a role_name "color" multiplicity "1" private
-	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	    classrelation_ref 144407 // color (<composition>)
-	  b role_name "" private
-	    classrelation_ref 144535 // <composition>
-      end
-
       operation 143127 "get_color"
-	const public return_type class_ref 135692 // color
+	preserve_cpp_body_indent const public return_type class_ref 135692 // color
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -775,7 +930,21 @@ ${inlines}
 	  param in name "color" type class_ref 135692 // color
 	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${volatile}${throw};
 "
-	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${throw}{
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}: color(color), origin(point) ${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160151 "LightSource"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}: color(), origin() ${throw}{
   ${body}}
 "
 	
@@ -821,6 +990,221 @@ ${members}};
 	    classrelation_ref 143639 // normale (<composition>)
 	  b role_name "" private
 	    classrelation_ref 143767 // <composition>
+      end
+    end
+
+    class 147607 "Material"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 160279 "indirect_rendering"
+	abstract cpp_virtual public return_type class_ref 135692 // color
+	nparams 4
+	  param in name "ray" type class_ref 142860 // Ray
+	  param inout name "scene" type class_ref 128012 // Scene
+	  param in name "impact" type class_ref 141079 // Impact
+	  param inout name "obj" type class_ref 134796 // Object
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}, ${t1} & ${p1}${v1}, const ${t2} & ${p2}${v2}, ${t3} & ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 160407 "direct_rendering"
+	abstract cpp_virtual public return_type class_ref 135692 // color
+	nparams 5
+	  param in name "ray" type class_ref 142860 // Ray
+	  param inout name "scene" type class_ref 128012 // Scene
+	  param in name "light_source" type class_ref 134551 // LightSource
+	  param in name "impact" type class_ref 141079 // Impact
+	  param inout name "obj" type class_ref 134796 // Object
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}, ${t1} & ${p1}${v1}, const ${t2} & ${p2}${v2}, const ${t3} & ${p3}${v3}, ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 147735 "MultiLightScene"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 151319 // <generalisation>
+	relation 149399 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 151319 // <generalisation>
+	  b parent class_ref 128012 // Scene
+      end
+
+      classrelation 151447 // sources (<directional composition>)
+	relation 149527 *-->
+	  stereotype "std::vector"
+	  a role_name "sources" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 151447 // sources (<directional composition>)
+	  b parent class_ref 134551 // LightSource
+      end
+
+      operation 160535 "render_ray"
+	preserve_cpp_body_indent cpp_virtual public return_type class_ref 135692 // color
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Computes the color of a ray.
+This is used for the original rays from the camera, but can also be used recursively by an object."
+      end
+
+      operation 160663 "MultiLightScene"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param in name "camera" type class_ref 128268 // Point
+	  param in name "screen_width" explicit_type "double"
+	  param in name "screen_center" type class_ref 128268 // Point
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}:
+    Scene(LightSource(Point(0, 0, 0), rt::color::BLACK), camera, screen_width, screen_center), sources(0) ${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160791 "add_light"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "src" type class_ref 134551 // LightSource
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 147863 "Plane"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 151703 // <generalisation>
+	relation 149783 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 151703 // <generalisation>
+	  b parent class_ref 134796 // Object
+      end
+
+      classrelation 151831 // p (<directional composition>)
+	relation 149911 *-->
+	  a role_name "p" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151831 // p (<directional composition>)
+	  b parent class_ref 128268 // Point
+      end
+
+      classrelation 151959 // normale (<directional composition>)
+	relation 150039 *-->
+	  a role_name "normale" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151959 // normale (<directional composition>)
+	  b parent class_ref 136332 // vector
+      end
+
+      operation 161303 "intersects"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "double"
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "If the object intersects the ray, returns the distance between the origin of the ray and the intersection point.
+Otherwise, returns a negative number."
+      end
+
+      operation 161431 "get_impact"
+	preserve_cpp_body_indent const cpp_virtual public return_type class_ref 141079 // Impact
+	nparams 1
+	  param in name "ray" type class_ref 142860 // Ray
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Computes the impact of a ray onto the object.
+Returns an impact with a null normal vector if the ray doesn't hit the object at all."
+      end
+
+      operation 161559 "Plane"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param in name "p" type class_ref 128268 // Point
+	  param in name "normale" type class_ref 136332 // vector
+	  param in name "color" type class_ref 135692 // color
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}, const ${t2} & ${p2}${)}: Object(color), p(p), normale(normale.unit()) ${throw}{
+  ${body}}
+"
+	
+	
+	
+	
       end
     end
   end
@@ -983,6 +1367,69 @@ ${module_end}
 "
       associated_classes
 	class_ref 141079 // Impact
+      end
+    end
+
+    artifact 141207 "material"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 147607 // Material
+      end
+    end
+
+    artifact 141335 "multilightscene"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 147735 // MultiLightScene
+      end
+    end
+
+    artifact 141463 "plane"
+      stereotype "source"
+      cpp_h "#pragma once
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 147863 // Plane
       end
     end
   end

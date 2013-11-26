@@ -1,6 +1,6 @@
 format 74
 "screen_vector" // screen_vector
-  revision 6
+  revision 7
   modified_by 23 "laarmen"
   // class settings
   //class diagram settings
@@ -845,6 +845,267 @@ format 74
 	comment "*
 			 * Draws a filled rectangle of a given color."
       end
+
+      operation 162839 "image"
+	preserve_cpp_body_indent protected explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "!< Wrapped SDL surface 
+*
+			 * Default constructor is protected and can be used
+			 * only by inheriting classes. It is forbidden to
+			 * build an image without at least its dimensions."
+      end
+
+      operation 162967 "image"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "width" explicit_type "int"
+	  param in name "height" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Main constructor. Builds an image from its dimensions."
+      end
+
+      operation 163095 "image"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "img" type class_ref 135820 // image
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}const ${t0} & ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy constructor.
+			 * Warning: this does not copy the actual data, so
+			 * any modification to the copy will impact the original.
+			 * To build a hard copy, use the copy member function."
+      end
+
+      operation 163223 "~image"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Destructor. Will decrease the reference counter
+			 * of the wrapped data and free it if it goes to 0."
+      end
+
+      operation 163351 "width"
+	const cpp_virtual cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+				return data->w;
+			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the width of the image."
+      end
+
+      operation 163479 "height"
+	const cpp_virtual cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+				return data->h;
+			};
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the height of the image."
+      end
+
+      operation 163607 "copy"
+	preserve_cpp_body_indent const cpp_virtual public return_type class_ref 135820 // image
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns a hard copy of the image."
+      end
+
+      operation 163735 "get_pixel"
+	preserve_cpp_body_indent const cpp_virtual public return_type class_ref 135692 // color
+	nparams 2
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Returns the color of a pixel."
+      end
+
+      operation 163863 "set_pixel"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 3
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, const ${t2} & ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, const ${t2} & ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Sets a pixel to a given color."
+      end
+
+      operation 163991 "blit"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "void"
+	nparams 4
+	  param inout name "dst" type class_ref 135820 // image
+	  param in name "srcrect" type class_ref 135948 // rect
+	  param in name "dstx" explicit_type "int"
+	  param in name "dsty" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}, const ${t1} & ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy/Past the image's source rectangle to a given destiation
+			 * at given coordinates."
+      end
+
+      operation 164119 "blit"
+	preserve_cpp_body_indent const cpp_virtual public explicit_return_type "void"
+	nparams 3
+	  param inout name "dst" type class_ref 135820 // image
+	  param in name "dstx" explicit_type "int"
+	  param in name "dsty" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Copy/Past time entire image to a given destiation
+			 * at given coordinates."
+      end
+
+      operation 164247 "draw_line"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a line from (x1,y1) to (x2,y2) of a given color."
+      end
+
+      operation 164375 "draw_rect"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a rectangle (uses draw_line) of a given color."
+      end
+
+      operation 164503 "fill_rect"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 5
+	  param in name "x1" explicit_type "int"
+	  param in name "y1" explicit_type "int"
+	  param in name "x2" explicit_type "int"
+	  param in name "y2" explicit_type "int"
+	  param in name "c" type class_ref 135692 // color
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, const ${t4} & ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, const ${t4} & ${p4}${)}${const}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "*
+			 * Draws a filled rectangle of a given color."
+      end
     end
 
     class 135948 "rect"
@@ -1317,15 +1578,10 @@ ${inlines}
 	relation_ref 128151 // <composition>
       end
 
-      classrelation 136343 // <composition>
-	relation_ref 135447 // <composition>
-      end
-
       classrelation 143767 // <composition>
 	relation_ref 142359 // <composition>
       end
     end
-
   end
 
   deploymentview 134796 "screen_vector"
@@ -1358,6 +1614,7 @@ ${namespace_start}
 ${members}
 ${namespace_end}"
       associated_classes
+	class_ref 135820 // image
       end
     end
 

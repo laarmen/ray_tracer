@@ -1,0 +1,5 @@
+class LightSource
+!!!135959.cpp!!!	get_origin() : Point
+    return origin;
+!!!143127.cpp!!!	get_color() : color
+    return color;

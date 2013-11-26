@@ -1,0 +1,5 @@
+class Ray
+!!!162071.cpp!!!	get_origin() : Point
+    return origin;
+!!!162199.cpp!!!	get_direction() : vector
+    return direction;

@@ -1,0 +1,13 @@
+class Point
+!!!134796.cpp!!!	x() : double
+    return abs;
+!!!135052.cpp!!!	y() : double
+    return ord;
+!!!135180.cpp!!!	z() : double
+    return this->app;
+!!!152076.cpp!!!	operator -(in p : Point) : vector
+    return rt::vector(abs-p.abs, ord-p.ord, app-p.app);
+!!!161687.cpp!!!	operator +=(in v : vector) : void
+    abs += v.x;
+    ord += v.y;
+    app += v.z;

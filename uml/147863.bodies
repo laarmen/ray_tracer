@@ -1,0 +1,23 @@
+class Plane
+!!!161303.cpp!!!	intersects(in ray : Ray) : double
+    double s1 = ray.get_direction() | normale;
+    double s2 = normale | (p - ray.get_origin());
+    if (s1 == 0. || s2 == 0.) {
+        return -42.;
+    }
+    return s2/s1;
+!!!161431.cpp!!!	get_impact(in ray : Ray) : Impact
+    double distance = intersects(ray);
+    Impact imp;
+    if (distance <= 0.) {
+        imp.normale = rt::vector(0,0,0);
+    } else {
+        imp.point = ray.get_origin();
+        imp.point += ray.get_direction() * distance;
+        if ((ray.get_direction() | normale) < 0.) {
+            imp.normale = normale;
+        } else {
+            imp.normale = normale * -1.;
+        }
+    }
+    return imp;

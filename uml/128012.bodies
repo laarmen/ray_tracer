@@ -1,0 +1,69 @@
+class Scene
+!!!142999.cpp!!!	add_object(inout obj : Object) : void
+    this->objects.push_back(&obj);
+!!!142871.cpp!!!	render(inout img : image) : void
+    double pixel_size = this->screen_width/img.width();
+    double delta_z,delta_x;
+    if (direction.x == 0) {
+        delta_z = 0;
+        delta_x = (direction.z > 0) ? pixel_size : -pixel_size;
+    } else if (direction.z == 0) {
+        delta_z = (direction.x > 0) ? pixel_size : -pixel_size;
+        delta_x = 0;
+    } else {
+        delta_z = sqrt(pixel_size/(1+pow((direction.z/direction.x), 2)));
+        delta_x = -delta_z*direction.z/direction.x;
+    }
+    rt::vector lateral_delta(delta_x, 0, delta_z);
+    rt::vector vertical_delta = (direction ^ lateral_delta).unit()*lateral_delta.norm();
+
+    Point p(camera);
+    p += direction+(lateral_delta*(-img.width()/2))+(vertical_delta*(-img.height()/2));
+    for(int i = img.height()-1 ; i >= 0 ; --i) {
+        Point p2(p);
+        for(int j = 0 ; j < img.width() ; ++j) {
+            img.set_pixel(j, i, render_ray(Ray(camera, p2)));
+            p2 += lateral_delta;
+        }
+        p += vertical_delta;
+    }
+!!!152460.cpp!!!	render_ray(in ray : Ray) : color
+    Object * interceptor = get_interceptor(ray);
+    if (!interceptor) {
+        return rt::color::BLACK;
+    }
+    std::vector<rt::color> colors(0);
+    colors.push_back(interceptor->render_indirect(ray, *this));
+    colors.push_back(interceptor->render_direct(ray, *this, light_source));
+    return add(colors);
+!!!152588.cpp!!!	get_interceptor(in ray : Ray, inout others : std::list<Object *> = 0) : Object
+    Object * interceptor = 0;
+    double minimum = 0;
+    double current = 0;
+    for (std::vector<Object *>::const_iterator it = objects.begin() ; it != objects.end() ; ++it) {
+        current = (*it)->intersects(ray);
+        if (current > 0) {
+            if (current < minimum || !interceptor) {
+                interceptor = *it;
+                minimum = current;
+                if (others) {
+                    others->push_front(*it);
+                }
+            } else if (others) {
+                others->push_back(*it);
+            }
+        }
+    }
+    return interceptor;
+!!!150039.cpp!!!	get_screen_width() : double
+    return screen_width;
+!!!150167.cpp!!!	get_camera() : Point
+    return camera;
+!!!162327.cpp!!!	get_screen_center() : Point
+    Point p(camera);
+    p += direction;
+    return p;
+!!!150295.cpp!!!	set_camera(in p : Point) : void
+    camera = p;
+!!!162455.cpp!!!	set_screen_center(in p : Point) : void
+    direction = p - camera;
