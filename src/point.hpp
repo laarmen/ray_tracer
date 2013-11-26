@@ -27,4 +27,7 @@ class Point {
 
     void operator +=(const rt::vector & v);
 
+    Point(double x, double y, double z);
+    Point();
+
 };

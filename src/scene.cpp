@@ -6,16 +6,13 @@
 
 #include <cmath>
 
-//Create a new Scene from the following data:
-//  * light : the light source of the scene (copied into the scene)
-//  * camera : the point of origin of the camera
-//  * screen_width : the width of the screen (NOT in pixels)
-//  * fov : The field of view. This is an angle in radians that defines the width of the view. The narrower it is, the further is the screen from the camera (and the closer to the objects displayed)
-//  * view_direction : from the camera, the direction of the upper left corner of the screen.
-Scene::Scene(const LightSource & light, const Point & camera, double screen_width, double fov, const rt::vector & view_direction):
-    fov(fov), screen_width(screen_width), objects(0), camera(camera), light_source(light), view_direction(view_direction)
-{
-}
+    //Create a new Scene from the following data:
+    //  * light : the light source of the scene (copied into the scene)
+    //  * camera : the point of origin of the camera
+    //  * screen_width : the width of the screen (NOT in pixels)
+    //  * screen_center: a point in the center of the screen.
+Scene::Scene(const LightSource & light, const Point & camera, double screen_width, const Point& screen_center):
+    direction(screen_center-camera), screen_width(screen_width), objects(0), camera(camera), light_source(light) {}
 
 //Add an object to the scene.
 //
@@ -26,17 +23,24 @@ void Scene::add_object(Object & obj) {
 
 //Renders the whole scene in `img`.
 void Scene::render(rt::image & img) {
-    double pixel_size = img.width()/this->screen_width;
-    double teta = fov/(2.0*img.width());
-    rt::vector lateral_delta(pixel_size*(view_direction.x*sin(teta) + view_direction.z*cos(teta)), pixel_size*view_direction.y, pixel_size*(view_direction.z*sin(teta)-view_direction.x*cos(teta)));
-    rt::vector vertical_delta = view_direction ^ lateral_delta;
-
-    double sin_half_fov = sin(fov/2.);
-    double corner_distance = screen_width*screen_width/(4.*sin_half_fov*sin_half_fov);
+    double pixel_size = this->screen_width/img.width();
+    double delta_z,delta_x;
+    if (direction.x == 0) {
+        delta_z = 0;
+        delta_x = pixel_size;
+    } else if (direction.z == 0) {
+        delta_z = pixel_size;
+        delta_x = 0;
+    } else {
+        delta_z = sqrt(pixel_size/(1+pow((direction.z/direction.x), 2)));
+        delta_x = -delta_z*direction.z/direction.x;
+    }
+    rt::vector lateral_delta(delta_x, 0, delta_z);
+    rt::vector vertical_delta = (direction ^ lateral_delta).unit()*pixel_size;
 
     Point p(camera);
-    p += (corner_distance * view_direction);
-    for(int i = 0 ; i < img.height() ; ++i) {
+    p += direction+(lateral_delta*(-img.width()/2))+(vertical_delta*(-img.height()/2));
+    for(int i = img.height()-1 ; i >= 0 ; --i) {
         Point p2(p);
         for(int j = 0 ; j < img.width() ; ++j) {
             img.set_pixel(j, i, render_ray(Ray(camera, p2)));
@@ -46,34 +50,51 @@ void Scene::render(rt::image & img) {
     }
 }
 
+static rt::color color_addition(const std::vector<rt::color>& v) {
+    double red_inv = 1.0;
+    double green_inv = 1.0;
+    double blue_inv = 1.0;
+    for (std::vector<rt::color>::const_iterator it = v.begin(); it != v.end(); ++it) {
+        red_inv *= static_cast<double>(255-it->get_red())/255.;
+        green_inv *= static_cast<double>(255-it->get_green())/255.;
+        blue_inv *= static_cast<double>(255-it->get_blue())/255.;
+    }
+    return rt::color(
+            ceil(255.*(1.0-red_inv)),
+            ceil(255.*(1.0-green_inv)),
+            ceil(255.*(1.0-blue_inv))
+        );
+}
 //Computes the color of a ray.
 //This is used for the original rays from the camera, but can also be used recursively by an object.
 rt::color Scene::render_ray(const Ray & ray) {
     Object * interceptor = get_interceptor(ray);
-    if (interceptor) {
+    if (!interceptor) {
         return rt::color::BLACK;
     }
-    rt::color indirect = interceptor->render_indirect(ray, *this);
-    rt::color direct = interceptor->render_direct(ray, *this, light_source);
+    std::vector<rt::color> colors(0);
+    colors.push_back(interceptor->render_indirect(ray, *this));
+    colors.push_back(interceptor->render_direct(ray, *this, light_source));
     // Pardon the C-like casts, but reinterpret_cast
-    double red = static_cast<double>(indirect.get_red())+direct.get_red();
-    red /= red+1.;
-    double green = static_cast<double>(indirect.get_green())+direct.get_green();
-    green /= green+1.;
-    double blue = static_cast<double>(indirect.get_blue())+direct.get_blue();
-    blue /= blue+1.;
-    return rt::color(static_cast<unsigned char>(ceil(red*256.0)), static_cast<unsigned char>(ceil(green*256.0)), static_cast<unsigned char>(ceil(green*256.0)));
+    return color_addition(colors);
 }
 
-Object * Scene::get_interceptor(const Ray & ray) {
+Object * Scene::get_interceptor(const Ray & ray, std::list<Object *> * others) {
     Object * interceptor = 0;
     double minimum = 0;
     double current = 0;
     for (std::vector<Object *>::const_iterator it = objects.begin() ; it != objects.end() ; ++it) {
         current = (*it)->intersects(ray);
-        if (current > 0 && current < minimum) {
-            interceptor = *it;
-            minimum = current;
+        if (current > 0) {
+            if (current < minimum || !interceptor) {
+                interceptor = *it;
+                minimum = current;
+                if (others) {
+                    others->push_front(*it);
+                }
+            } else if (others) {
+                others->push_back(*it);
+            }
         }
     }
     return interceptor;
@@ -84,24 +105,16 @@ double Scene::get_screen_width() const {
     return screen_width;
 }
 
-//Returns the field of view of the scene (an angle in radians).
-double Scene::get_fov() const {
-    return fov;
-}
-
 //Returns the point where the camera stands.
 Point Scene::get_camera() const {
     return camera;
 }
 
-//Returns the direction of the upper left corner of the screen from the PoV of the camera.
-rt::vector Scene::get_view_direction() const {
-    return view_direction;
-}
-
-//Sets the field of view to `angle`.
-void Scene::set_fov(double angle) {
-    fov = angle;
+//Returns the position of the center of the screen.
+Point Scene::get_screen_center() const {
+    Point p(camera);
+    p += direction;
+    return p;
 }
 
 //Moves the camera to the point `p`
@@ -109,8 +122,9 @@ void Scene::set_camera(const Point & p) {
     camera = p;
 }
 
-//Points the upper left corner of the screen towards `v` from the camera.
-void Scene::set_view_direction(const rt::vector & v) {
-    view_direction = v;
+
+//Moves the center of the screen to the point `p`
+void Scene::set_screen_center(const Point & p) {
+    direction = p - camera;
 }
 

@@ -7,6 +7,7 @@
 struct Impact {
     Point point;
 
+    // It must be normalized.
     rt::vector normale;
 
 };

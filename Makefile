@@ -3,7 +3,7 @@
 SRC_DIR := ./src
 
 CC	:= g++
-CFLAGS	:= -W -Wall --ansi --pedantic
+CFLAGS	:= -W -Wall --ansi --pedantic -g
 
 INCLUDE	:= -Isrc/ -I/usr/include -I/usr/include/SDL
 LIBS	:= -L/usr/lib -lSDL

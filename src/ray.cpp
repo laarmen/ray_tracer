@@ -2,11 +2,11 @@
 #include "ray.hpp"
 
 //Construct a ray from a point of origin and a direction vector. The latter doesn't have to be normalized.
-Ray::Ray(const Point & origin, const rt::vector & direction): origin(origin), direction(direction) {
+Ray::Ray(const Point & origin, const rt::vector & direction): origin(origin), direction(direction.unit()) {
 }
 
 //Construct a ray originating from `origin` and passing through the point `through`.
-Ray::Ray(const Point & origin, const Point & through): origin(origin), direction(through-origin) {
+Ray::Ray(const Point & origin, const Point & through): origin(origin), direction((through-origin).unit()) {
 }
 
 // Returns the point of origin of the ray

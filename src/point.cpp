@@ -27,4 +27,5 @@ void  Point::operator +=(const rt::vector & v) {
     app += v.z;
 }
 
-
+Point::Point(): abs(0.), ord(0.), app(0.) {}
+Point::Point(double x, double y, double z): abs(x), ord(y), app(z) {}
