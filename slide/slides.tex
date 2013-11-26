@@ -48,6 +48,16 @@ réfraction.
 
 \end{frame}
 
+\begin{frame}{Modèles utilisés pour le rendu}
+Nous avons utilisé les deux modèles suivants :
+\begin{description}
+  \item [Source ponctuelle unique et monochromatique] les ombres obtenues sont
+très tranchées.
+  \item [Sources ponctuelles polychromatiques] permet un rendu plus réaliste,
+comme avec des sources secondaires.
+\end{description}
+\end{frame}
+
 \begin{frame}{Table des matières}
 	\tableofcontents
 \end{frame}
@@ -133,23 +143,52 @@ public:
 \end{frame}
 
 \section{Améliorations}
-\begin{frame}{Gestion de plusieurs sources}
-
-\end{frame}
 
 \begin{frame}{Objets non sphériques}
+Il est possible de remplacer les sphères par d'autres types d'objets.
+
+\begin{block}{Exemple : création de plans}
+Il suffit de créer une classe plan qui hérite de objet.
+\end{block}
 \end{frame}
 
-\begin{frame}{Ombres portées}
-\end{frame}
-
+\subsection{Gestion des matériaux}
 \begin{frame}{Gestion des matériaux : la réfraction}
+La réfraction est le phénomène de déviation du rayon lumineux qui se produit
+lors d'un changement de milieu transparents d'indices différents : sa
+trajectoire est modifiée.
+
+\begin{center}
+  \includegraphics[scale=0.2]{img/Refraction_fr.png}
+\end{center}
+
+\begin{block}{Implémentation}
+Il faut munir objet de l'indice du milieu, qui permettra de calculer la
+déviation du rayon, et d'un coefficient de transmission, grâce auquel on saura
+quelle est l'intensité transmise.
+\end{block}
 \end{frame}
 
 \begin{frame}{Gestion des matériaux : la réflexion}
+La réflexion est un phénomène de déviation du rayon lumineux : en arrivant sur
+une surface, une partie du rayon est renvoyé.
+
+\begin{center}
+  \includegraphics[scale=0.4]{img/introduction.png}
+\end{center}
+
+\begin{block}{Implémentation}
+L'intensité du rayon réfléchi dépend du coefficient de transmission (on a
+$R+T=1$). La direction de ce rayon est calculée à partir de l'angle d'incidence.
+\end{block}
 \end{frame}
 
 \begin{frame}{Autres améliorations}
+\begin{block}{Backend camera}
+On modifie les paramètres comme la position de la caméra et du cadre, puis on enregistre la frame.
+
+On appelle la librairie libav/ffmpeg pour créer une video à partir des images obtenues.
+\end{block}
 \end{frame}
 
 \section{Conclusion}
