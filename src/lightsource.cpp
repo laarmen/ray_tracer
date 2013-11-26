@@ -11,6 +11,7 @@ rt::color LightSource::get_color() const {
     return color;
 }
 
-LightSource::LightSource(const Point & point, const rt::color & color): origin(point), color(color) {
+LightSource::LightSource(const Point & point, const rt::color & color): color(color), origin(point) {
 }
 
+LightSource::LightSource(): color(), origin() {}

@@ -13,17 +13,17 @@ rt::color compose(const rt::color& c1, const rt::color& c2) {
 }
 
 rt::color add(const std::vector<rt::color>& v) {
-    double red_inv = 1.0;
-    double green_inv = 1.0;
-    double blue_inv = 1.0;
+    double red_sum = 0;
+    double green_sum = 0;
+    double blue_sum = 0;
     for (std::vector<rt::color>::const_iterator it = v.begin(); it != v.end(); ++it) {
-        red_inv *= static_cast<double>(255-it->get_red())/255.;
-        green_inv *= static_cast<double>(255-it->get_green())/255.;
-        blue_inv *= static_cast<double>(255-it->get_blue())/255.;
+        red_sum += pow(static_cast<double>(it->get_red()), 2);
+        green_sum += pow(static_cast<double>(it->get_green()), 2);
+        blue_sum += pow(static_cast<double>(it->get_blue()), 2);
     }
-    return rt::color(
-            ceil(255.*(1.0-red_inv)),
-            ceil(255.*(1.0-green_inv)),
-            ceil(255.*(1.0-blue_inv))
+    ;
+    return rt::color(ceil(sqrt(red_sum/v.size())),
+            ceil(sqrt(green_sum/v.size())),
+            ceil(sqrt(blue_sum/v.size()))
         );
 }

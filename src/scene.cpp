@@ -28,16 +28,16 @@ void Scene::render(rt::image & img) {
     double delta_z,delta_x;
     if (direction.x == 0) {
         delta_z = 0;
-        delta_x = pixel_size;
+        delta_x = (direction.z > 0) ? pixel_size : -pixel_size;
     } else if (direction.z == 0) {
-        delta_z = pixel_size;
+        delta_z = (direction.x > 0) ? pixel_size : -pixel_size;
         delta_x = 0;
     } else {
         delta_z = sqrt(pixel_size/(1+pow((direction.z/direction.x), 2)));
         delta_x = -delta_z*direction.z/direction.x;
     }
     rt::vector lateral_delta(delta_x, 0, delta_z);
-    rt::vector vertical_delta = (direction ^ lateral_delta).unit()*pixel_size;
+    rt::vector vertical_delta = (direction ^ lateral_delta).unit()*lateral_delta.norm();
 
     Point p(camera);
     p += direction+(lateral_delta*(-img.width()/2))+(vertical_delta*(-img.height()/2));
@@ -61,7 +61,6 @@ rt::color Scene::render_ray(const Ray & ray) {
     std::vector<rt::color> colors(0);
     colors.push_back(interceptor->render_indirect(ray, *this));
     colors.push_back(interceptor->render_direct(ray, *this, light_source));
-    // Pardon the C-like casts, but reinterpret_cast
     return add(colors);
 }
 

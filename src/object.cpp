@@ -8,7 +8,7 @@
 #include <algorithm>
 
 // Useful if one catches one's own rays because of floating error.
-#define OWNRAY_EPSILON 0.00000000000000075
+#define OWNRAY_EPSILON 0.00000000000075
 
 // Constructs the base of an object: its color.
 Object::Object(const rt::color color, Material * material): color(color), material(material) {
@@ -28,8 +28,13 @@ rt::color Object::render_direct(const Ray & ray, Scene & scene, const LightSourc
     // In case there has been mixups due to rounding errors and the object catches
     // its own ray back to the light when it shouldn't (which is NOT always the case)
     // detect it
-    if (interceptor && (interceptor != this || intersects(to_light) >= OWNRAY_EPSILON || others.size() > 1)) {
-        return rt::color::BLACK;
+    if (interceptor) {
+        if (interceptor != this && interceptor->intersects(ray) < (imp.point - light_source.get_origin()).norm())
+            return rt::color::BLACK;
+        if (intersects(to_light) >= OWNRAY_EPSILON)
+            return rt::color::BLACK;
+        if (others.size() > 1)
+            return rt::color::BLACK;
     }
     return rt::color(
             static_cast<unsigned char>(scalar*basic.get_red()),

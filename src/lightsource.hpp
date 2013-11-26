@@ -6,6 +6,9 @@
 
 //A source of white light.
 class LightSource {
+  private:
+    rt::color color;
+
   protected:
     Point origin;
 
@@ -14,14 +17,11 @@ class LightSource {
     Point get_origin() const;
 
 
-  private:
-    rt::color color;
-
-
   public:
     //The color of the light source.
     rt::color get_color() const;
 
     LightSource(const Point & point, const rt::color & color);
+    LightSource();
 
 };
