@@ -1,6 +1,6 @@
 format 74
 "uml"
-  revision 10
+  revision 11
   modified_by 23 "laarmen"
   cpp_root_dir "../src/"
 
@@ -38,7 +38,7 @@ format 74
   mark_for_import
   
   ncouples 1
-  key "html dir" value "/home/laarmen/MIT1/ray_tracer/doc/"
+  key "html dir" value "/home/laarmen/dev/ray_tracer/doc/"
   classview 128012 "global"
     //class diagram settings
     draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language c++ show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -295,7 +295,6 @@ This is used for the original rays from the camera, but can also be used recursi
 	
 	comment "Moves the center of the screen to the point `p`"
       end
-
     end
 
     class 128268 "Point"
