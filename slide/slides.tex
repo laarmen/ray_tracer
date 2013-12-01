@@ -10,7 +10,7 @@
 
 \lstset{language=C++}
 
-\title{Lancer de rayon}
+\title{Lancer de rayons}
 \subtitle{Première partie}
 \author{Simon Chopin et Marie-Morgane Paumard}
 \date{26 novembre 2013}
@@ -29,7 +29,7 @@
 \begin{frame}{Introduction}
 \begin{alertblock}{Définition}
 Le lancer de rayon est une technique de synthèse d'image. Il s'agit de calculer
-les trajectoiress des rayons lumineux depuis la caméra jusqu'à l'objet, puis de
+les trajectoires des rayons lumineux depuis la caméra jusqu'à l'objet, puis de
 l'objet jusqu'à la source.
 \end{alertblock}
 
@@ -41,7 +41,7 @@ l'objet jusqu'à la source.
   \begin{description}
     \item[Raycasting (1968)] Lancer un rayon pixel par pixel et trouver l'objet
 le plus proche.
-    \item[\textsc{Whitted} (1979)] Génération des rayons : ombre, réflexion et
+    \item[WHITTED (1979)] Génération des rayons : ombre, réflexion et
 réfraction.
   \end{description}
 \end{block}
@@ -49,7 +49,7 @@ réfraction.
 \end{frame}
 
 \begin{frame}{Modèles utilisés pour le rendu}
-Nous avons utilisé les deux modèles suivants :
+Nous avons utilisé les deux modèles suivants, dans le vide :
 \begin{description}
   \item [Source ponctuelle unique et monochromatique] les ombres obtenues sont
 très tranchées.
@@ -109,7 +109,7 @@ class Scene {
             \begin{itemize}
                 \item Transparence
                 \item Réflexion
-                \item \emph{et cæetera}
+                \item \emph{et cætera}
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -144,14 +144,25 @@ public:
 
 \section{Améliorations}
 
+
+\begin{frame}{Améliorations}
+
+
+\begin{center}
+  \includegraphics[scale=0.2]{img/screenshot.png}
+\end{center}
+\end{frame}
+
 \begin{frame}{Plusieurs sources}
-\begin{block}{Intérêts}
-\begin{itemize}
-\item plop
-\end{itemize}
-
-\end{block}
-
+  Quand on insère plusieurs sources, on effectue une moyenne quadratique sur
+leurs couleurs.
+  \begin{block}{Intérêts}
+    \begin{itemize}
+    \item Lumières polychromatiques ;
+    \item Ombres plus diffuses ;
+    \item Prélude aux sources secondaires.
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Objets non sphériques}
@@ -177,6 +188,8 @@ Il faut munir objet de l'indice du milieu, qui permettra de calculer la
 déviation du rayon, et d'un coefficient de transmission, grâce auquel on saura
 quelle est l'intensité transmise.
 \end{block}
+
+La réfraction permet aussi de se placer dans l'air ou l'eau et non pas le vide.
 \end{frame}
 
 \begin{frame}{Gestion des matériaux : la réflexion}
@@ -201,8 +214,8 @@ On appelle la bibliothèque libav/ffmpeg pour créer une video à partir des ima
 \end{block}
 \end{frame}
 
-\section{Conclusion}
-\begin{frame}{Conclusion}
+\section{Conclusion/Questions?}
+\begin{frame}{Conclusion/Questions ?}
 
 \begin{center}
   \includegraphics[scale=0.5]{img/compiling.png}
