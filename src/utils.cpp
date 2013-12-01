@@ -17,6 +17,22 @@ rt::color add(const std::vector<rt::color>& v) {
     double green_sum = 0;
     double blue_sum = 0;
     for (std::vector<rt::color>::const_iterator it = v.begin(); it != v.end(); ++it) {
+        red_sum += static_cast<double>(it->get_red());
+        green_sum += static_cast<double>(it->get_green());
+        blue_sum += static_cast<double>(it->get_blue());
+    }
+    return rt::color(
+            ceil(256.0*red_sum/(red_sum+1)),
+            ceil(256.0*green_sum/(green_sum+1)),
+            ceil(256.0*blue_sum/(blue_sum+1))
+        );
+}
+
+rt::color color_average(const std::vector<rt::color>& v) {
+    double red_sum = 0;
+    double green_sum = 0;
+    double blue_sum = 0;
+    for (std::vector<rt::color>::const_iterator it = v.begin(); it != v.end(); ++it) {
         red_sum += pow(static_cast<double>(it->get_red()), 2);
         green_sum += pow(static_cast<double>(it->get_green()), 2);
         blue_sum += pow(static_cast<double>(it->get_blue()), 2);

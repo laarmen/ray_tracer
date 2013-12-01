@@ -12,16 +12,16 @@
 int main(void)
 {
 	rt::screen s(1280,1024);
-    Sphere s1(Point(0, 4, 10), 4, rt::color::WHITE);
-    Sphere s2(Point(2, 3, 20), 2, rt::color(150, 150, 150));
-    Sphere s3(Point(6, 13, 20), 4, rt::color(10, 50, 150));
-    Plane ground(Point(0, 0, 0), rt::vector(0, -1, 0), rt::color(128, 60, 128));
-    Plane wall(Point(0, 0, -30), rt::vector(0, 0, -1), rt::color(128, 128, 60));
-    LightSource ls1(Point(-20, 80, 80), rt::color::WHITE);
-    LightSource ls2(Point(40, 40, 28), rt::color(255, 255, 255));
-    LightSource ls3(Point(-20, 60, 10), rt::color::BLUE);
+    Sphere s1(Point(0, 4, 10), 4, rt::color(150, 150, 150));
+    Sphere s2(Point(2, 3, 20), 2, rt::color(150, 100, 150));
+    Sphere s3(Point(6, 13, 20), 4, rt::color(150, 100, 100));
+    Plane ground(Point(0, 0, 0), rt::vector(0, 1, 0), rt::color(200, 200, 200));
+    Plane wall(Point(0, 0, -30), rt::vector(0, 0, -1), rt::color(150, 150, 150));
+    LightSource ls1(Point(0, 80, 50), rt::color(155, 155, 155));
+    LightSource ls2(Point(40, 40, 28), rt::color(10, 155, 105));
+    LightSource ls3(Point(-30, 60, 30), rt::color(80, 140, 150));
 
-    MultiLightScene sc(Point(0, 3, 30), 4, Point(0, 3, 28));
+    MultiLightScene sc(Point(0, 3, 80), 4.5, Point(0, 3.5, 68));
     sc.add_object(ground);
     sc.add_object(wall);
     sc.add_object(s1);

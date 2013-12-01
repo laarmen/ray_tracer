@@ -1,11 +1,14 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
 \usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{wrapfig}
 
-\title{Lancer de rayon - Première partie}
-\author{Simon CHOPIN \and Marie-Morgane PAUMARD}
+\title{Lancer de rayon — Première partie}
+\author{Simon \textsc{Chopin} \and Marie-Morgane \textsc{PAUMARD}}
 \date{\today}
 
 \begin{document}
@@ -13,7 +16,11 @@
 \maketitle
 \tableofcontents
 \begin{abstract}
-><
+    Ce rapport décrit une implémentation d'un moteur de \emph{lancer de rayon} 
+    qui est une technique de \emph{rendu 3D} caractérisée par le \emph{réalisme}
+    de ses résultats. Le moteur a été codé en \emph{C++}, et se limite au rendu
+    de \emph{sphères}, l'objectif principal étant un système \emph{extensible}.
+    
 \end{abstract}
 
 \paragraph{Mots-clef}
@@ -40,7 +47,97 @@ ponctuelle et monochromatique : la lumière blanche est modélisée par la somme
 de sources monochromatiques.
 
 \section{Implémentation de base}
+\subsection{Description des fonctionnalités}
+Dans un premier temps, nous avons souhaité aller au plus simple. Ainsi, la première version du moteur
+n'était capable de gérer qu'une seule source de lumière ponctuelle, et les objets ne pouvaient être que 
+des sphères. Seules les sources primaires de luminosités sont prises en compte — pas de réflexion ni de
+transparence.
 
+\subsection{Diagramme UML}
+La création d'un système complexe de classes peut évidemment être faite directement dans le code, 
+mais nous avons préféré utiliser un logiciel de modélisation de diagramme UML, BOUML\footnote{Nous
+    avons dû utiliser une vieille version, les dernières moutures étant maintenant sous license
+propriétaire}. Cela nous a permis de raisonner plus facilement en termes de relations entre les
+classes, et nous a également été d'une aide précieuse pour générer un squelette propre et cohérent
+pour les sources, ne nous laissant plus que l'implémentation à écrire.
+
+La figure \ref{UML} représente le diagramme sans les améliorations.
+
+\begin{figure}[hbtp]
+    \caption{Diagramme UML du moteur de lancer de rayons}
+    \label{UML}
+    \begin{center}
+        \includegraphics[scale=0.35]{UML}
+    \end{center}
+\end{figure}
+
+\subsection{Classe \texttt{Scene}}
+\begin{wrapfigure}{r}{0.5\textwidth}
+    %\vspace{-20pt}
+    \caption{Diagramme de la classe Scene}
+    \label{scene}
+    \begin{center}
+    \includegraphics[scale=0.3]{scene.png}
+    \end{center}
+\end{wrapfigure}
+
+La classe Scene (figure \ref{scene}), et plus spécifiquement sa méthode
+\verb,render,, est le point d'entrée du moteur. Nous avons choisi de déclarer la plupart
+de ses méthodes comme virtuelles, car la perte de performance nous a paru un faible prix
+à payer pour pouvoir bénéficier de la flexibilité que cela, conjugué au découpage fin des
+fonctionnalités, apporte au système.
+
+Lors de l'appel à \verb,render,, la première étape est de calculer la position de l'écran
+et les distances entre les pixels. Une fois cela fait, un rayon est généré pour chaque
+pixel, et la méthode \verb,render_ray, prend le relai.
+
+Cette méthode appelle d'abord \verb,get_interceptor, afin d'obtenir l'objet qui intercepte
+le rayon. Si il en existe un, on calcule d'abord la couleur obtenue via les sources secondaires
+de lumière — ici, ça sera donc du noir — et la moyenne quadratique\footnote{N'ayant pas la notion
+    d'intensité dans nos sources lumineuses, nous nous sommes décidés pour ceci malgré le fait
+que ça n'ait aucune base physique} des sources primaires — la seule source de la scène —, et on
+"additionne" les deux résultats pour avoir la couleur du pixel.
+
+\subsubsection{Interface de \texttt{get\_interceptor}}
+L'interface un peu incongrue de \verb,get_interceptor, est dûe à nos
+efforts pour éliminer les artefacts résultant du calcul sur les flottants.
+
+En effet, notamment sur les plans, il arrive que le point calculé à l'interception soit derrière
+le plan, ce qui fait que celui-ci est le premier intercepteur du rayon généré. Afin d'éliminer ce
+cas-ci, nous avons besoin de la liste des autres intercepteurs si le premier est dans ce cas-là.
+
+\subsection{Classe \texttt{Object}}
+
+La class \verb,Object, est l'abstraction des objets présents sur la scène qui sont susceptibles
+d'être illuminés par les sources lumineuses. C'est une classe abstraite, car elle ne possède pas
+de notion de volume ou de forme.
+
+À cette fin, toutes les classes implémentant \verb,Object, doivent fournir les méthodes \verb,intercepts,
+et \verb,get_impact,, la première donnant la distance entre le point d'origin d'un rayon et son point
+d'intersection sur l'objet, et la seconde calculant le point d'intersection et la normale à la surface
+de l'objet en ce point.
+
+En plus de cela, un objet peut avoir un pointeur de type \verb,Material,, qui lorsque non-nul permet
+de représenter les comportements inhérents au matériau de l'objet au lieu de sa forme. Une des conséquences
+de cette approche est qu'une sphère de verre et une sphère d'aluminium auront toutes deux le même type. Une
+autre possibilité de ce système est de changer le comportement d'un objet au fil du temps.
+
+\subsection{Utilisation des éléments propres à C++}
+\paragraph{Pointeurs}
+Bien que notre moteur utilise les pointeurs par nécessité — on ne peut pas utiliser les conteneurs de la
+STL avec des références, car il faut des objets qui soient copiables avec un constructeur par défaut —
+nous avons préféré ne pas prendre en compte la durée de vie des objets pointés, et préférons laisser à
+l'utilisateur le soin de s'assurer de la validité des données fournies, notamment des objets, tout le long
+de l'utilisation du moteur.
+
+\paragraph{Sous-classe et implémentation dans le header}
+Dans la classe Sphère, il faut à plusieurs endroits calculer des résultats à partir des coefficients d'une
+équation du second degré. Pour faciliter la manipulation de ces coefficients, nous avons créé une sous-classe
+de Sphere que nous avons souhaité garder privée, car elle fait partie des détails d'implémentation.
+
+Cependant, pour ce faire, nous avons été forcé de définir une fonction dans le header de \verb,Sphere, car
+le compilateur refusait de compiler la définition d'une méthode d'une classe privée en dehors de la classe
+à laquelle elle appartenait.
 
 \section{Améliorations}
 \subsection{Améliorations réalisées}
@@ -101,7 +198,7 @@ sur une surface, une partie du rayon est renvoyé.
 \end{center}
 
 \paragraph{Implémentation}
-Pour implémenter la réflexion, on muni la classe objet de l'indice du milieu et
+Pour implémenter la réflexion, on munit la classe objet de l'indice du milieu et
 d'un coefficient de réflexion $r$.
 
 Ce coefficient est obtenu par la loi : $r= \frac{n_i - n_r}{n_i + n_r}$. On a

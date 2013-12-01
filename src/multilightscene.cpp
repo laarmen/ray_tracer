@@ -9,11 +9,15 @@ rt::color MultiLightScene::render_ray(const Ray & ray) {
     if (!interceptor) {
         return rt::color::BLACK;
     }
+    rt::color indirect = interceptor->render_indirect(ray, *this);
     std::vector<rt::color> colors(0);
-    colors.push_back(interceptor->render_indirect(ray, *this));
     for(std::vector<LightSource>::const_iterator it = sources.begin(); it != sources.end(); ++it) {
         colors.push_back(interceptor->render_direct(ray, *this, *it));
     }
+    rt::color direct = color_average(colors);
+    colors.resize(0);
+    colors.push_back(indirect);
+    colors.push_back(direct);
     return add(colors);
 }
 
