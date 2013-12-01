@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{graphicx}
 
 \title{Lancer de rayon - Première partie}
 \author{Simon CHOPIN \and Marie-Morgane PAUMARD}
@@ -43,6 +45,16 @@ de sources monochromatiques.
 \section{Améliorations}
 \subsection{Améliorations réalisées}
 \subsubsection{Objets non sphériques}
+Pour pouvoir observer les ombres portées, nous avons insérés des plans dans
+notre rendu. Il s'agit d'une classe similaire à la classe sphère : elle hérite
+également de la classe objet.
+
+Sur la figure ci-dessous, on voit deux plans (l'un jaune, l'autre violet) et
+trois sphères. Il y a trois sources monochromatiques.
+
+\begin{center}
+  \includegraphics[scale=0.2]{img/screenshot.png}
+\end{center}
 
 
 \subsubsection{Backend camera}
@@ -52,6 +64,10 @@ de sources monochromatiques.
 La réfraction est le phénomène de déviation du rayon lumineux qui se produit
 lors d’un changement de milieux transparents d’indices différents : sa
 trajectoire est modifiée selon sa longueur d'onde.
+
+\begin{center}
+  \includegraphics[scale=0.5]{img/refraction.png}
+\end{center}
 
 \paragraph{Implémentation}
 Dans notre programme, il est aisé de mettre en œubre la réflexion. Pour ce faire
@@ -80,12 +96,16 @@ de vagues formes désaturées.
 La réflexion est un phénomène de déviation du rayon lumineux : en arrivant
 sur une surface, une partie du rayon est renvoyé.
 
+\begin{center}
+  \includegraphics[scale=0.5]{img/reflexion.png}
+\end{center}
+
 \paragraph{Implémentation}
 Pour implémenter la réflexion, on muni la classe objet de l'indice du milieu et
 d'un coefficient de réflexion $r$.
 
-Ce coefficient est obtenu par la loi : $r= \frac{n_i - n_r}{n_i + n_r}$. On a 
-$1+r=t$.
+Ce coefficient est obtenu par la loi : $r= \frac{n_i - n_r}{n_i + n_r}$. On a
+donc $1+r=t$.
 
 \section{Conclusion}
 
